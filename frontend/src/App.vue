@@ -1,17 +1,26 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div>{{ msg }}</div>
+    <button @click="getMsg">获取信息</button>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import axios from "axios"
 export default {
   name: 'app',
-  components: {
-    HelloWorld
+  data () {
+    return {
+      msg: 'hw'
+    }
+  },
+  methods: {
+    getMsg(){
+      const api = '/api/msgs'
+      axios.get(api).then(resp => {
+        this.msg = resp.data
+      })
+    }
   }
 }
 </script>
